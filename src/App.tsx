@@ -1,7 +1,13 @@
-import React from 'react';
+//components
+import { ErrorBoundary, ErrorFallback } from 'app/components/Error';
+import Auth from 'app/pages/Auth';
 
 function App() {
-  return <div>Hello World</div>;
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <Auth />
+    </ErrorBoundary>
+  );
 }
 
 export default App;

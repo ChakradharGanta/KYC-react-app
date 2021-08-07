@@ -12,5 +12,6 @@ export const primaryStyles = css`
 export const rootStyles = css`
   &.MuiButton-root {
     font-size: 1.5rem;
+    white-space: nowrap;
   }
 `;

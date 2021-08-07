@@ -1,5 +1,7 @@
 //components
-import { InfoCard, Header, ContentWrapper, Input, Box, GenderSelect, Button } from 'app/components';
+import { InfoCard, Header, ContentWrapper, Input, Box, TypeList, Button } from 'app/components';
+
+const genderTypes = ['Male', 'Female', 'Other'];
 
 const CustomerDeatils = () => {
   return (
@@ -23,7 +25,7 @@ const CustomerDeatils = () => {
         <Box className="text-2xl mt-12">
           <strong>Your gender </strong>
         </Box>
-        <GenderSelect />
+        <TypeList list={genderTypes} />
         <Box className="mt-12 mx-auto">
           <Button variant="contained" color="primary">
             Continue

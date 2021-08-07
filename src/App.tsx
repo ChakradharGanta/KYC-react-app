@@ -1,11 +1,11 @@
 //components
 import { ErrorBoundary, ErrorFallback } from 'app/components/Error';
-import CustomerDetails from 'app/pages/CustomerDetails';
+import GovernmentID from 'app/pages/GovernmentID';
 
 function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <CustomerDetails />
+      <GovernmentID />
     </ErrorBoundary>
   );
 }

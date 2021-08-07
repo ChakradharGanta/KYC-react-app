@@ -1,11 +1,11 @@
 //components
 import { ErrorBoundary, ErrorFallback } from 'app/components/Error';
-import Auth from 'app/pages/Auth';
+import CustomerDetails from 'app/pages/CustomerDetails';
 
 function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <Auth />
+      <CustomerDetails />
     </ErrorBoundary>
   );
 }

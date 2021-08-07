@@ -17,5 +17,6 @@ export const inputStyles = css`
   }
   .MuiOutlinedInput-input {
     padding: 1.85rem 0rem;
+    border: none;
   }
 `;

@@ -4,6 +4,8 @@ import { errorStyle, minHeight40, inputStyles } from './styles';
 const COMMON_CLASSES = {
   input: 'p-0',
   error: errorStyle,
+  notchedOutline: 'border-none',
+  focused: 'border-none',
 };
 
 export const OVERRIDES = {

@@ -1,11 +1,11 @@
 //components
 import { ErrorBoundary, ErrorFallback } from 'app/components/Error';
-import GovernmentID from 'app/pages/GovernmentID';
+import Camera from 'app/pages/Camera';
 
 function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <GovernmentID />
+      <Camera shape="circle" />
     </ErrorBoundary>
   );
 }

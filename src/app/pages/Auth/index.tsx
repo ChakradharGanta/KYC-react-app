@@ -1,17 +1,39 @@
 //libs
+import { useState } from 'react';
 import c from 'classnames';
 import Avatar from '@material-ui/core/Avatar';
 //components
-import Header from 'app/components/Header';
-import Box from 'app/components/Box';
-import LoginForm from 'app/components/Form';
+// import Header from 'app/components/Header';
+import { Box, Input, Button } from 'app/components';
 //styles
 import { logoStyle } from './styles';
+import { useHistory } from 'react-router';
+
+const auth = 'chakri';
 
 const Auth = () => {
+  const [username, setUsername] = useState('');
+  const [password, setpassword] = useState('');
+  const [error, setError] = useState(false);
+  const history = useHistory();
+
+  const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(event.target.value);
+  };
+
+  const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setpassword(event.target.value);
+  };
+
+  const onButtonClick = () => {
+    if (!(username === auth && password === auth)) {
+      setError(true);
+    }
+    history.push('/customerDetails', 'hello');
+  };
+
   return (
     <>
-      <Header />
       <Box className="flex flex-col mx-auto items-center space-y-24 w-4/5 mt-24">
         <Avatar
           variant="square"
@@ -21,7 +43,27 @@ const Auth = () => {
         />
         <Box className="text-3xl">{'Hi! Welcome to XYZ'}</Box>
         <Box className="text-2xl">{'One step KYC solution'}</Box>
-        <LoginForm />
+        <Input
+          placeholder="Username"
+          className="w-full"
+          error={error}
+          onChange={onUsernameChange}
+        />
+        <Input
+          placeholder="Password"
+          className="w-full"
+          error={error}
+          type="password"
+          onChange={onPasswordChange}
+        />
+        {error ? <Box className="text-2xl text-red">Invalid credentials</Box> : null}
+        <Button
+          variant="contained"
+          color="primary"
+          className="mt-24 w-full"
+          onClick={onButtonClick}>
+          Login
+        </Button>
       </Box>
     </>
   );

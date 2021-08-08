@@ -1,11 +1,9 @@
+import { useEffect, useRef, useCallback } from 'react';
 import c from 'classnames';
 import { Box, Button } from 'app/components';
 import useToggle from 'app/hooks/useToggle';
 import { cameraStyles } from './styles';
-
-interface CameraProps {
-  shape: 'circle' | 'rectangle';
-}
+import { useHistory } from 'react-router';
 
 const items = ['Tips', 'Close'];
 
@@ -15,16 +13,71 @@ const renderTips = () => (
   </Box>
 );
 
-const Camera = (props: CameraProps) => {
-  const { shape } = props;
+const Camera = () => {
+  const history = useHistory();
+  const { shape, type, side, cardType } = history.location.state;
   const { value: open, toggle } = useToggle(false);
+  const video = useRef<any>();
+  const canvas = useRef<any>();
+
+  const startCamera = useCallback(async () => {
+    const constraints = {
+      audio: false,
+      video: {
+        facingMode: shape === 'circle' ? 'user' : 'environment',
+        width: { min: 640, max: 1920 },
+        height: { min: 480, max: 1080 },
+      },
+    };
+
+    navigator.mediaDevices
+      .getUserMedia(constraints)
+      .then((stream) => {
+        if (video.current) video.current.srcObject = stream;
+      })
+      .catch((err) => console.log(err));
+  }, [shape]);
+
+  const stopCamera = () => {
+    const stream = video.current.srcObject;
+    const tracks = stream.getTracks();
+    tracks.forEach((track: any) => {
+      track.stop();
+    });
+  };
+
+  const takePhoto = async () => {
+    const width = video.current.videoWidth;
+    const height = video.current.videoHeight;
+
+    const ctx = canvas.current.getContext('2d');
+    canvas.current.width = width;
+    canvas.current.height = height;
+
+    ctx.drawImage(video.current, 0, 0, width, height);
+
+    const imageUrl = canvas.current.toDataURL('image/png');
+    stopCamera();
+    if (type === 'selfie') {
+      history.push('/selfie', { imgSrc: imageUrl });
+    } else if (type === 'govt id front') {
+      history.push('/governmentId', { imgSrc: imageUrl, side: 'Front' });
+    } else {
+      history.push('/governmentId', { imgSrc: imageUrl, side: 'Back' });
+    }
+  };
+
+  useEffect(() => {
+    startCamera();
+  }, [startCamera]);
+
   return (
     <Box className={c('absolute inset-0 items-center flex flex-col justify-around', cameraStyles)}>
-      <Box className="flex mt-12 space-x-12">
-        <Button key={items[0]} variant="outlined" className="flex-shrink-0" onClick={toggle}>
+      <Box className="flex mt-12 space-x-12 z-20">
+        <Button key={items[0]} variant="outlined" onClick={toggle}>
           {items[0]}
         </Button>
-        <Button key={items[1]} variant="outlined" className="flex-shrink-0">
+        <Button key={items[1]} variant="outlined">
           {items[1]}
         </Button>
       </Box>
@@ -41,11 +94,16 @@ const Camera = (props: CameraProps) => {
           <Box className="text-2xl text-white">Your Name and Photo should be clearly visible</Box>
           <Box className="rectangle mx-auto border-2 border-gray-100" />
           <Box className="text-2xl text-white">
-            Fit front side of the aadhar card inside the box{' '}
+            Fit {side} side of the {cardType} inside the box{' '}
           </Box>
         </Box>
       )}
-      <Box className="w-64 h-64 mx-auto bg-gray-300 border-4 border-gray-100  rounded-full mb-12" />
+      <Box
+        onClick={takePhoto}
+        className="w-64 h-64 mx-auto bg-gray-300 border-4 border-gray-100  rounded-full mb-12"
+      />
+      <video ref={video} className="video" autoPlay />
+      <canvas ref={canvas} className="video hidden" />
     </Box>
   );
 };

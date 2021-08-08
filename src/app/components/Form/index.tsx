@@ -9,7 +9,7 @@ const LoginForm = () => {
       <Input placeholder="Username" className="w-full" />
       <Input placeholder="Password" className="w-full" />
       <Button variant="contained" color="primary" className="mt-24 w-full">
-        Get OTP
+        Login
       </Button>
     </>
   );

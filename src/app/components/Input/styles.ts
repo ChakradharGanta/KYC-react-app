@@ -5,8 +5,8 @@ export const minHeight40 = css`
 `;
 
 export const errorStyle = css`
-  &.Mui-error {
-    border-color: #fca5a5;
+  fieldset {
+    border-color: #fca5a5 !important;
   }
 `;
 
@@ -18,5 +18,8 @@ export const inputStyles = css`
   .MuiOutlinedInput-input {
     padding: 1.85rem 0rem;
     border: none;
+  }
+  &.MuiOutlinedInput-root.Mui-focused fieldset {
+    border-color: #80bdff !important;
   }
 `;

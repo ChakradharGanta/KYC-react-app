@@ -6,3 +6,4 @@ export { default as Header } from './Header';
 export { default as Button } from './Button';
 export { default as ContentWrapper } from './ContentWrapper';
 export { default as TypeList } from './TypeList';
+export { default as VerifyOptions } from './VerifyOptions';

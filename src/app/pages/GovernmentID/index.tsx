@@ -3,7 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { useHistory } from 'react-router';
 import { idStyle } from './styles';
 import c from 'classnames';
-import { InfoCard, ContentWrapper, Box, TypeList, Button } from 'app/components';
+import { InfoCard, ContentWrapper, Box, TypeList, Button, VerifyOptions } from 'app/components';
 import { GOVT_IDS } from './consts';
 import { useState } from 'react';
 
@@ -68,14 +68,7 @@ const GovernmentID = () => {
           src={imgSrc === '' ? selectedId[0][side] : imgSrc}
         />
         {imgSrc ? (
-          <Box className="flex justify-between">
-            <Button variant="outlined" className="flex-shrink-0" onClick={onRetake}>
-              Retake
-            </Button>
-            <Button variant="outlined" className="flex-shrink-0" onClick={onSubmit}>
-              Looks Good
-            </Button>
-          </Box>
+          <VerifyOptions onSubmit={onSubmit} onRetake={onRetake} />
         ) : (
           <Box className="mt-24 mx-auto">
             <Button variant="contained" color="primary" onClick={onTakePhoto}>

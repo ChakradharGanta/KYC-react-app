@@ -2,11 +2,12 @@
 import { forwardRef } from 'react';
 import MaterialButton, { ButtonProps } from '@material-ui/core/Button';
 //styles
-import { primaryStyles, rootStyles } from './styles';
+import { containedPrimaryStyles, outlinedPrimaryStyles, rootStyles } from './styles';
 
 const OVERRIDES = {
-  containedPrimary: primaryStyles,
+  containedPrimary: containedPrimaryStyles,
   root: rootStyles,
+  outlinedPrimary: outlinedPrimaryStyles,
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {

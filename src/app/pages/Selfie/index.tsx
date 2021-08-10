@@ -2,7 +2,7 @@
 import c from 'classnames';
 import Avatar from '@material-ui/core/Avatar';
 //components
-import { ContentWrapper, InfoCard, Box, Button } from 'app/components';
+import { ContentWrapper, InfoCard, Box, Button, VerifyOptions } from 'app/components';
 //styles
 import { selfieStyles } from './styles';
 import { useCallback } from 'react';
@@ -53,14 +53,7 @@ const SelfiePage = () => {
           className={c('mx-auto mt-24', selfieStyles)}
         />
         {imgSrc ? (
-          <Box className="flex justify-between">
-            <Button variant="outlined" className="flex-shrink-0" onClick={onRetake}>
-              Retake
-            </Button>
-            <Button variant="outlined" className="flex-shrink-0" onClick={onSubmit}>
-              Looks Good
-            </Button>
-          </Box>
+          <VerifyOptions onSubmit={onSubmit} onRetake={onRetake} />
         ) : (
           <Box className="mt-24 mx-auto">
             <Button variant="contained" color="primary" onClick={_onClick}>

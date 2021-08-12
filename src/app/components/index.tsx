@@ -7,3 +7,4 @@ export { default as Button } from './Button';
 export { default as ContentWrapper } from './ContentWrapper';
 export { default as TypeList } from './TypeList';
 export { default as VerifyOptions } from './VerifyOptions';
+export { default as Typography } from './Typography';

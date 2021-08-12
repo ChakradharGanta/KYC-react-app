@@ -2,7 +2,7 @@
 import c from 'classnames';
 import Avatar from '@material-ui/core/Avatar';
 //components
-import { ContentWrapper, InfoCard, Box, Button, VerifyOptions } from 'app/components';
+import { ContentWrapper, InfoCard, Box, Button, VerifyOptions, Typography } from 'app/components';
 //styles
 import { selfieStyles } from './styles';
 import { useCallback } from 'react';
@@ -44,10 +44,10 @@ const SelfiePage = () => {
         verification"
       />
       <ContentWrapper>
-        <Box className="text-3xl">Take a selfie</Box>
-        <Box className="text-2xl my-12">
+        <Typography variant="display-s">Take a selfie</Typography>
+        <Typography variant="body-short-02" className="my-8">
           Make sure your whole face is visible without any glare or blur
-        </Box>
+        </Typography>
         <Avatar
           src={imgSrc === '' ? 'selfie.png' : imgSrc}
           className={c('mx-auto mt-24', selfieStyles)}
@@ -57,7 +57,7 @@ const SelfiePage = () => {
         ) : (
           <Box className="mt-24 mx-auto">
             <Button variant="contained" color="primary" onClick={_onClick}>
-              Click Photo
+              <Typography>Click Photo</Typography>
             </Button>
           </Box>
         )}

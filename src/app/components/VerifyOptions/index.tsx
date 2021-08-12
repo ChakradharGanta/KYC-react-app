@@ -1,4 +1,4 @@
-import { Box, Button } from 'app/components';
+import { Box, Button, Typography } from 'app/components';
 
 interface VerifyOptionsProps {
   onSubmit: () => void;
@@ -10,10 +10,10 @@ const VerifyOptions = (props: VerifyOptionsProps) => {
   return (
     <Box className="flex justify-between">
       <Button variant="outlined" color="primary" className="flex-shrink-0" onClick={onRetake}>
-        Retake
+        <Typography>Retake</Typography>
       </Button>
       <Button variant="contained" color="primary" className="flex-shrink-0" onClick={onSubmit}>
-        Looks Good
+        <Typography>Looks Good</Typography>
       </Button>
     </Box>
   );

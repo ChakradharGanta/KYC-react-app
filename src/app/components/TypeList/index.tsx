@@ -1,6 +1,6 @@
 //libs
 import { useCallback, useState } from 'react';
-import { Box, Button } from 'app/components';
+import { Box, Button, Typography } from 'app/components';
 import c from 'classnames';
 import { buttonStyle } from './styles';
 
@@ -31,7 +31,7 @@ const TypeList = (props: TypeListProps) => {
           onClick={(_event) => _onClick(item)}
           variant="outlined"
           className={c('flex-shrink-0', gender === item ? buttonStyle : '')}>
-          {item}
+          <Typography variant="body-short-01">{item}</Typography>
         </Button>
       ))}
     </Box>

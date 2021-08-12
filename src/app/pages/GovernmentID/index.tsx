@@ -3,7 +3,15 @@ import Avatar from '@material-ui/core/Avatar';
 import { useHistory } from 'react-router';
 import { idStyle } from './styles';
 import c from 'classnames';
-import { InfoCard, ContentWrapper, Box, TypeList, Button, VerifyOptions } from 'app/components';
+import {
+  InfoCard,
+  ContentWrapper,
+  Box,
+  TypeList,
+  Button,
+  VerifyOptions,
+  Typography,
+} from 'app/components';
 import { GOVT_IDS } from './consts';
 import { useState } from 'react';
 
@@ -55,12 +63,14 @@ const GovernmentID = () => {
         subInfo="Please upload a Government ID for KYC verification"
       />
       <ContentWrapper>
-        <Box className="text-2xl">Select a Government ID</Box>
+        <Typography variant="display-s">Select a Government ID</Typography>
         <TypeList name="govtId" list={govtIds} onTypeChange={setGovtId} />
-        <Box className="text-2xl">
+        <Typography>
           {side === 'front' ? 'Front' : 'Back'} side of {govtId}
-        </Box>
-        <Box className="text-2xl mt-12">Your name and photo should be clearly visible</Box>
+        </Typography>
+        <Typography variant="body-short-02" className="mt-12">
+          Your name and photo should be clearly visible
+        </Typography>
         <Avatar
           variant="square"
           alt="KYC logo"
@@ -72,7 +82,7 @@ const GovernmentID = () => {
         ) : (
           <Box className="mt-24 mx-auto">
             <Button variant="contained" color="primary" onClick={onTakePhoto}>
-              Click Photo
+              <Typography>Click Photo</Typography>
             </Button>
           </Box>
         )}

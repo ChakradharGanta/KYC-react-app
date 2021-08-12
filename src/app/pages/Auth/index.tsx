@@ -3,8 +3,7 @@ import { useState } from 'react';
 import c from 'classnames';
 import Avatar from '@material-ui/core/Avatar';
 //components
-// import Header from 'app/components/Header';
-import { Box, Input, Button } from 'app/components';
+import { Box, Input, Button, Typography } from 'app/components';
 //styles
 import { logoStyle } from './styles';
 import { useHistory } from 'react-router';
@@ -41,8 +40,8 @@ const Auth = () => {
           className={c('m-28', logoStyle)}
           src="KYClogo.png"
         />
-        <Box className="text-3xl">{'Hi! Welcome to XYZ'}</Box>
-        <Box className="text-2xl">{'One step KYC solution'}</Box>
+        <Typography variant="display-m">{'Hi! Welcome to XYZ'}</Typography>
+        <Typography>{'One step KYC solution'}</Typography>
         <Input
           placeholder="Username"
           className="w-full"
@@ -62,7 +61,7 @@ const Auth = () => {
           color="primary"
           className="mt-24 w-full"
           onClick={onButtonClick}>
-          Login
+          <Typography>Login</Typography>
         </Button>
       </Box>
     </>

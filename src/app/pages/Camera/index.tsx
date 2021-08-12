@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 import c from 'classnames';
-import { Box, Button } from 'app/components';
+import { Box, Button, Typography } from 'app/components';
 import useToggle from 'app/hooks/useToggle';
 import { cameraStyles } from './styles';
 import { useHistory } from 'react-router';
@@ -9,7 +9,9 @@ const items = ['Tips', 'Close'];
 
 const renderTips = () => (
   <Box className="text-2xl bg-gray-200 rounded-xl text-center mx-12 p-12">
-    Hold the camera still & Make sure there is enough lighting before taking pics
+    <Typography>
+      Hold the camera still & Make sure there is enough lighting before taking pics
+    </Typography>
   </Box>
 );
 
@@ -75,27 +77,29 @@ const Camera = () => {
     <Box className={c('absolute inset-0 items-center flex flex-col justify-around', cameraStyles)}>
       <Box className="flex mt-12 space-x-12 z-20">
         <Button key={items[0]} variant="outlined" onClick={toggle}>
-          {items[0]}
+          <Typography>{items[0]}</Typography>
         </Button>
-        <Button key={items[1]} variant="outlined">
-          {items[1]}
+        <Button key={items[1]} variant="outlined" onClick={() => history.go(-1)}>
+          <Typography>{items[1]}</Typography>
         </Button>
       </Box>
       {open ? renderTips() : null}
       {shape === 'circle' ? (
         <Box className="flex flex-col items-center text-center space-y-8">
           <Box className="rounded-full circle mx-auto border-2 border-gray-100" />
-          <Box className="text-2xl text-white">
+          <Typography className="text-white">
             Make sure your face fits inside the <br /> circle and is clearly visible
-          </Box>
+          </Typography>
         </Box>
       ) : (
         <Box className="flex flex-col items-center space-y-8">
-          <Box className="text-2xl text-white">Your Name and Photo should be clearly visible</Box>
+          <Typography className="text-white">
+            Your Name and Photo should be clearly visible
+          </Typography>
           <Box className="rectangle mx-auto border-2 border-gray-100" />
-          <Box className="text-2xl text-white">
+          <Typography className="text-white">
             Fit {side} side of the {cardType} inside the box{' '}
-          </Box>
+          </Typography>
         </Box>
       )}
       <Box

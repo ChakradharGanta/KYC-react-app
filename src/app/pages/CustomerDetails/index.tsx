@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 //components
-import { InfoCard, ContentWrapper, Input, Box, TypeList, Button } from 'app/components';
+import { InfoCard, ContentWrapper, Input, Box, TypeList, Button, Typography } from 'app/components';
 import { useHistory } from 'react-router';
 
 const genderTypes = ['Male', 'Female', 'Other'];
@@ -48,9 +48,7 @@ const CustomerDeatils = () => {
         subInfo="We'll verify it with your KYC documents"
       />
       <ContentWrapper className="">
-        <Box className="text-2xl">
-          <strong>Your full name </strong>
-        </Box>
+        <Typography variant="display-s">Your full name</Typography>
         <Input
           placeholder="eg:Raj Kumar Babu"
           name="customerName"
@@ -58,10 +56,13 @@ const CustomerDeatils = () => {
           className="mt-12"
           error={!state.isNameValid}
         />
-        <Box className="text-xl mt-6">Ensure it matches name on PAN</Box>
-        <Box className="text-2xl mt-12">
-          <strong>Your date of birth </strong>
-        </Box>
+        <Typography variant="body-short-02" className="mt-6">
+          Ensure it matches name on PAN
+        </Typography>
+
+        <Typography variant="display-s" className="mt-12">
+          Your date of birth
+        </Typography>
         <Input
           type="date"
           placeholder="dd/mm/yyyy"
@@ -70,13 +71,15 @@ const CustomerDeatils = () => {
           error={!state.isDobValid}
           onChange={onDateChange}
         />
-        <Box className="text-2xl mt-12">
-          <strong>Your gender</strong>
-        </Box>
+        <Typography variant="display-s" className="mt-12">
+          Your gender
+        </Typography>
         <TypeList name="gender" list={genderTypes} className="justify-around" />
         <Box className="mt-12 mx-auto">
           <Button variant="contained" color="primary" onClick={onContinue}>
-            Continue
+            <Typography variant="body-short-01" className="">
+              Continue
+            </Typography>
           </Button>
         </Box>
       </ContentWrapper>

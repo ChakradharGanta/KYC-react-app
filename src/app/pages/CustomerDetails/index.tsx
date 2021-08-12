@@ -43,7 +43,7 @@ const CustomerDeatils = () => {
   return (
     <>
       <InfoCard
-        imgSrc="KYClogo.png"
+        imgSrc="contactIcon.png"
         mainInfo="Hi! Help us setup your account"
         subInfo="We'll verify it with your KYC documents"
       />

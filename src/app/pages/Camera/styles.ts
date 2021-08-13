@@ -1,6 +1,7 @@
 import { css } from '@emotion/css';
 
 export const cameraStyles = css`
+  height: 90vh;
   .circle {
     width: 30rem;
     height: 30rem;
@@ -12,11 +13,14 @@ export const cameraStyles = css`
   }
 
   .video {
-    position: absolute;
-    z-index: -50;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: 100vh;
+    position: fixed;
+    object-fit: cover !important;
+    z-index: -10;
+    top: 0;
+    left: 0;
+    transform: translateX(-5%);
+    width: 105% !important;
+    height: 100%;
+    max-width: 105% !important;
   }
 `;

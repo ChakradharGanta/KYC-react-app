@@ -59,7 +59,7 @@ const Camera = () => {
     ctx.drawImage(video.current, 0, 0, width, height);
 
     const imageUrl = canvas.current.toDataURL('image/png');
-    stopCamera();
+    await stopCamera();
     if (type === 'selfie') {
       history.push('/selfie', { imgSrc: imageUrl });
     } else if (type === 'govt id front') {
@@ -74,7 +74,7 @@ const Camera = () => {
   }, [startCamera]);
 
   return (
-    <Box className={c('absolute inset-0 items-center flex flex-col justify-around', cameraStyles)}>
+    <Box className={c('items-center flex flex-col justify-around', cameraStyles)}>
       <Box className="flex mt-12 space-x-12 z-20">
         <Button key={items[0]} variant="outlined" onClick={toggle}>
           <Typography>{items[0]}</Typography>
@@ -107,7 +107,7 @@ const Camera = () => {
         className="w-64 h-64 mx-auto bg-gray-300 border-4 border-gray-100  rounded-full mb-12"
       />
       <video ref={video} className="video" autoPlay />
-      <canvas ref={canvas} className="video hidden" />
+      <canvas ref={canvas} className="hidden" />
     </Box>
   );
 };

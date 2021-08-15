@@ -3,7 +3,6 @@ import c from 'classnames';
 import { Box, Button, Typography } from 'app/components';
 import useToggle from 'app/hooks/useToggle';
 import { cameraStyles } from './styles';
-import { useHistory } from 'react-router';
 
 const items = ['Tips', 'Close'];
 
@@ -15,9 +14,9 @@ const renderTips = () => (
   </Box>
 );
 
-const Camera = () => {
-  const history = useHistory();
-  const { shape, type, side, cardType } = history.location.state;
+const Camera = (props: any) => {
+  const { history } = props;
+  const { type, side } = props.match.params;
   const { value: open, toggle } = useToggle(false);
   const video = useRef<any>();
   const canvas = useRef<any>();
@@ -26,7 +25,7 @@ const Camera = () => {
     const constraints = {
       audio: false,
       video: {
-        facingMode: shape === 'circle' ? 'user' : 'environment',
+        facingMode: type === 'selfie' ? 'user' : 'environment',
         width: { min: 640, max: 1920 },
         height: { min: 480, max: 1080 },
       },
@@ -38,7 +37,7 @@ const Camera = () => {
         if (video.current) video.current.srcObject = stream;
       })
       .catch((err) => console.log(err));
-  }, [shape]);
+  }, [type]);
 
   const stopCamera = () => {
     const stream = video.current.srcObject;
@@ -60,13 +59,15 @@ const Camera = () => {
 
     const imageUrl = canvas.current.toDataURL('image/png');
     await stopCamera();
+
+    let path: string;
     if (type === 'selfie') {
-      history.push('/selfie', { imgSrc: imageUrl });
-    } else if (type === 'govt id front') {
-      history.push('/governmentId', { imgSrc: imageUrl, side: 'Front' });
+      path = '/verifyPhoto/selfie/1';
     } else {
-      history.push('/governmentId', { imgSrc: imageUrl, side: 'Back' });
+      path = `/verifyPhoto/${type}/${side}`;
     }
+
+    history.replace(path, { imgSrc: imageUrl });
   };
 
   useEffect(() => {
@@ -84,7 +85,7 @@ const Camera = () => {
         </Button>
       </Box>
       {open ? renderTips() : null}
-      {shape === 'circle' ? (
+      {type === 'selfie' ? (
         <Box className="flex flex-col items-center text-center space-y-8">
           <Box className="rounded-full circle mx-auto border-2 border-gray-100" />
           <Typography className="text-white">
@@ -98,7 +99,7 @@ const Camera = () => {
           </Typography>
           <Box className="rectangle mx-auto border-2 border-gray-100" />
           <Typography className="text-white">
-            Fit {side} side of the {cardType} inside the box{' '}
+            Fit {side} side of the {type} inside the box{' '}
           </Typography>
         </Box>
       )}

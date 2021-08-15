@@ -1,14 +1,18 @@
+//libs
+import c from 'classnames';
+//components
 import { Box, Button, Typography } from 'app/components';
 
 interface VerifyOptionsProps {
   onSubmit: () => void;
   onRetake: () => void;
+  className?: string;
 }
 
 const VerifyOptions = (props: VerifyOptionsProps) => {
-  const { onSubmit, onRetake } = props;
+  const { onSubmit, onRetake, className = '' } = props;
   return (
-    <Box className="flex justify-between">
+    <Box className={c('flex justify-between', className)}>
       <Button variant="outlined" color="primary" className="flex-shrink-0" onClick={onRetake}>
         <Typography>Retake</Typography>
       </Button>

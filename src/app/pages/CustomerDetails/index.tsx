@@ -26,7 +26,7 @@ const CustomerDeatils = () => {
     if (state.isDobValid && state.isNameValid) {
       console.log(userName, dob);
       sessionStorage.setItem('user', JSON.stringify({ username: userName, dateOfBirth: dob }));
-      history.push('/selfie', { imgSrc: '' });
+      history.replace({ pathname: '/selfie' });
     }
   }, [dob, history, state.isDobValid, state.isNameValid, state.name, userName]);
 

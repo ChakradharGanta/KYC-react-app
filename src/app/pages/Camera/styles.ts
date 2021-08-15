@@ -23,4 +23,8 @@ export const cameraStyles = css`
     height: 100%;
     max-width: 105% !important;
   }
+
+  .MuiButton-outlined {
+    background-color: white !important;
+  }
 `;

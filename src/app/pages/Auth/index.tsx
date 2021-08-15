@@ -28,7 +28,7 @@ const Auth = () => {
     if (!(username === auth && password === auth)) {
       setError(true);
     }
-    history.push('/customerDetails', 'hello');
+    history.replace({ pathname: '/customerDetails' });
   };
 
   return (

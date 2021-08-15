@@ -1,4 +1,11 @@
-export const GOVT_IDS = [
+export interface IdType {
+  id: string;
+  type: string;
+  front: string;
+  back: string;
+}
+
+export const GOVT_IDS: IdType[] = [
   { id: 'aadhar', type: 'Aadhar', front: 'aadhaar-front.png', back: 'aadhaar-back.png' },
   { id: 'pan', type: 'PAN', front: 'panFront.png', back: 'panBack.png' },
   {

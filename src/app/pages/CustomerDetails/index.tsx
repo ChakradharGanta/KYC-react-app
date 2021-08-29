@@ -10,6 +10,7 @@ const genderTypes = ['Male', 'Female', 'Other'];
 const CustomerDeatils = () => {
   const history = useHistory();
   const [state, dispatch] = useReducer(validationReducer, initialState);
+  window.sessionStorage.setItem('currentPath', history.location.pathname);
 
   const onContinue = useCallback(() => {
     let flag = { isNameValid: true, isDobValid: true, isGenderValid: true };
@@ -42,7 +43,7 @@ const CustomerDeatils = () => {
         'user',
         JSON.stringify({ username: name, dateOfBirth: dob, gender: gender })
       );
-      history.replace({ pathname: '/selfie' });
+      history.replace({ pathname: '/selfie' }, { triggered: true });
     }
   }, [state, history]);
 

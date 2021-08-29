@@ -32,7 +32,7 @@ const VerifyPhoto = (props: any) => {
       type === 'selfie' ? `${type}` : `${type} ${side}`,
       JSON.stringify(imgSrc)
     );
-    history.replace({ pathname: path });
+    history.replace({ pathname: path }, { triggered: true });
   }, [history, imgSrc, path, side, type]);
 
   return (

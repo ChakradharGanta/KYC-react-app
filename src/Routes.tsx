@@ -6,18 +6,19 @@ import GovernmentID from 'app/pages/GovernmentID';
 import Selfie from 'app/pages/Selfie';
 import Success from 'app/pages/Success';
 import VerifyPhoto from 'app/pages/VerifyPhoto';
+import ProtectedRoute from './ProtectedRoute';
 
 const Routes = () => {
   return (
     <Router>
       <Switch>
         <Route exact path="/" component={Auth} />
-        <Route exact path="/camera/:type/:side" component={Camera} />
-        <Route exact path="/customerDetails" component={CustomerDeatils} />
-        <Route exact path="/governmentId/:side" component={GovernmentID} />
-        <Route exact path="/selfie" component={Selfie} />
-        <Route exact path="/verifyPhoto/:type/:side" component={VerifyPhoto} />
-        <Route exact path="/success" component={Success} />
+        <ProtectedRoute exact path="/camera/:type/:side" component={Camera} />
+        <ProtectedRoute exact path="/customerDetails" component={CustomerDeatils} />
+        <ProtectedRoute exact path="/governmentId/:side" component={GovernmentID} />
+        <ProtectedRoute exact path="/selfie" component={Selfie} />
+        <ProtectedRoute exact path="/verifyPhoto/:type/:side" component={VerifyPhoto} />
+        <ProtectedRoute exact path="/success" component={Success} />
       </Switch>
     </Router>
   );

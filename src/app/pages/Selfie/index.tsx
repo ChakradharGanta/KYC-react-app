@@ -8,31 +8,19 @@ import { ContentWrapper, InfoCard, Box, Button, Typography } from 'app/component
 //styles
 import { selfieStyles } from './styles';
 
+const SUB_INFO = 'Please upload a selfie and provide personal details for KYC verification';
+
 const SelfiePage = () => {
   const history = useHistory();
+  window.sessionStorage.setItem('currentPath', history.location.pathname);
 
   const _onClick = useCallback(() => {
-    history.push('/camera/selfie/1');
+    history.push('/camera/selfie/1', { triggered: true });
   }, [history]);
 
   return (
     <>
-      <InfoCard
-        imgSrc="id.png"
-        mainInfo="Verify your identity"
-        subInfo="
-        Please
-        upload
-        a
-        selfie
-        and
-        provide
-        personal
-        details
-        for
-        KYC
-        verification"
-      />
+      <InfoCard imgSrc="id.png" mainInfo="Verify your identity" subInfo={SUB_INFO} />
       <ContentWrapper>
         <Typography variant="display-s">Take a selfie</Typography>
         <Typography variant="body-short-02" className="my-8">

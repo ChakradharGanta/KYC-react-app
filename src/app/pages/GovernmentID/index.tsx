@@ -16,9 +16,10 @@ const GovernmentID = (props: any) => {
   const { side } = props.match.params;
   const [govtId, setGovtId] = useState('Aadhar');
   const selectedId = useMemo(() => GOVT_IDS.find((item) => item.type === govtId), [govtId]);
+  window.sessionStorage.setItem('currentPath', history.location.pathname);
 
   const onTakePhoto = useCallback(() => {
-    history.push(`/camera/${govtId}/${side}`);
+    history.push(`/camera/${govtId}/${side}`, { triggered: true });
   }, [govtId, history, side]);
 
   return (

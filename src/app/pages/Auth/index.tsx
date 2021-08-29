@@ -1,5 +1,5 @@
 //libs
-import { useState } from 'react';
+import React, { useState } from 'react';
 import c from 'classnames';
 import Avatar from '@material-ui/core/Avatar';
 //components
@@ -15,6 +15,7 @@ const Auth = () => {
   const [password, setpassword] = useState('');
   const [error, setError] = useState(false);
   const history = useHistory();
+  window.sessionStorage.setItem('currentPath', history.location.pathname);
 
   const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -28,7 +29,7 @@ const Auth = () => {
     if (!(username === auth && password === auth)) {
       setError(true);
     }
-    history.replace({ pathname: '/customerDetails' });
+    history.replace({ pathname: '/customerDetails' }, { triggered: true });
   };
 
   return (

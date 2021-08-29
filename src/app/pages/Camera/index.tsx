@@ -61,7 +61,7 @@ const Camera = (props: any) => {
 
     ctx.drawImage(video.current, 0, 0, width, height);
 
-    const imageUrl = canvas.current.toDataURL('image/png');
+    const imageUrl = canvas.current.toDataURL('image/webp');
     await stopCamera();
 
     let path: string;

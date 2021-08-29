@@ -2,12 +2,17 @@
 import { ErrorBoundary, ErrorFallback } from 'app/components/Error';
 import { Header } from 'app/components';
 import Routes from './Routes';
+import AuthContextProvider from './app/hooks/useAuthentication';
 
 function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <Header />
-      <Routes />
+      <AuthContextProvider>
+        <>
+          <Header />
+          <Routes />
+        </>
+      </AuthContextProvider>
     </ErrorBoundary>
   );
 }

@@ -1,19 +1,22 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useReducer } from 'react';
 //components
 import { InfoCard, ContentWrapper, Input, Box, TypeList, Button, Typography } from 'app/components';
 import { useHistory } from 'react-router';
+// actions
+import { validationReducer, initialState, ActionType } from './actions';
 
 const genderTypes = ['Male', 'Female', 'Other'];
 
 const CustomerDeatils = () => {
   const history = useHistory();
-  const [state, setState] = useState({ isNameValid: true, isDobValid: true, name: '', dob: '' });
-  const [userName, setUserName] = useState('');
-  const [dob, setDob] = useState('');
+  const [state, dispatch] = useReducer(validationReducer, initialState);
 
   const onContinue = useCallback(() => {
+    let flag = { isNameValid: true, isDobValid: true, isGenderValid: true };
+    const { name, dob, gender } = state;
+
     if (/[^a-zA-Z]/.test(state.name) || state.name === '') {
-      setState((prevState) => ({ ...prevState, isNameValid: false }));
+      flag = { ...flag, isNameValid: false };
     }
 
     const today = new Date();
@@ -21,23 +24,38 @@ const CustomerDeatils = () => {
     const mm = String(today.getMonth() + 1).padStart(2, '0');
     const yyyy = today.getFullYear();
     const todayDate = yyyy + '-' + mm + '-' + dd;
-    if (todayDate <= dob) setState((prevState) => ({ ...prevState, isDobValid: false }));
+    const isValid = new Date(dob);
+    if (todayDate <= dob || dob === '') flag = { ...flag, isDobValid: false };
+    try {
+      isValid.toISOString();
+    } catch {
+      flag = { ...flag, isDobValid: false };
+    }
 
-    if (state.isDobValid && state.isNameValid) {
-      console.log(userName, dob);
-      sessionStorage.setItem('user', JSON.stringify({ username: userName, dateOfBirth: dob }));
+    if (gender === '') {
+      flag = { ...flag, isGenderValid: false };
+    }
+    dispatch({ type: ActionType.SetError, payload: { value: flag } });
+
+    if (flag.isDobValid && flag.isNameValid && flag.isGenderValid) {
+      sessionStorage.setItem(
+        'user',
+        JSON.stringify({ username: name, dateOfBirth: dob, gender: gender })
+      );
       history.replace({ pathname: '/selfie' });
     }
-  }, [dob, history, state.isDobValid, state.isNameValid, state.name, userName]);
+  }, [state, history]);
 
   const onNameChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(event.target.value);
-    setState((prevState) => ({ ...prevState, isNameValid: true }));
+    dispatch({ type: ActionType.SetName, payload: { value: event.target.value } });
   }, []);
 
   const onDateChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setDob(event.target.value);
-    setState((prevState) => ({ ...prevState, isDobValid: true }));
+    dispatch({ type: ActionType.SetDob, payload: { value: event.target.value } });
+  }, []);
+
+  const onGenderChange = useCallback((gender: string) => {
+    dispatch({ type: ActionType.SetGender, payload: { value: gender } });
   }, []);
 
   return (
@@ -72,9 +90,17 @@ const CustomerDeatils = () => {
           onChange={onDateChange}
         />
         <Typography variant="display-s" className="mt-12">
-          Your gender
+          Your Gender
         </Typography>
-        <TypeList name="gender" list={genderTypes} className="justify-around" />
+        <TypeList
+          name="gender"
+          list={genderTypes}
+          onTypeChange={onGenderChange}
+          className="justify-around"
+        />
+        {!state.isGenderValid ? (
+          <Typography variant="body-short-03">Select you gender</Typography>
+        ) : null}
         <Box className="mt-12 mx-auto">
           <Button variant="contained" color="primary" onClick={onContinue}>
             <Typography variant="body-short-01" className="">

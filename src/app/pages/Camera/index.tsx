@@ -1,7 +1,11 @@
+//libs
 import { useEffect, useRef, useCallback } from 'react';
 import c from 'classnames';
+//components
 import { Box, Button, Typography } from 'app/components';
+//hooks
 import useToggle from 'app/hooks/useToggle';
+//styles
 import { cameraStyles } from './styles';
 
 const items = ['Tips', 'Close'];
@@ -70,6 +74,11 @@ const Camera = (props: any) => {
     history.replace(path, { imgSrc: imageUrl });
   };
 
+  const goBack = async () => {
+    await stopCamera();
+    history.go(-1);
+  };
+
   useEffect(() => {
     startCamera();
   }, [startCamera]);
@@ -80,7 +89,7 @@ const Camera = (props: any) => {
         <Button key={items[0]} variant="outlined" onClick={toggle}>
           <Typography>{items[0]}</Typography>
         </Button>
-        <Button key={items[1]} variant="outlined" onClick={() => history.go(-1)}>
+        <Button key={items[1]} variant="outlined" onClick={goBack}>
           <Typography>{items[1]}</Typography>
         </Button>
       </Box>

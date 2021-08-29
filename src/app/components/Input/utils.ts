@@ -1,4 +1,6 @@
+//libs
 import c from 'classnames';
+//styles
 import { errorStyle, minHeight40, inputStyles } from './styles';
 
 const COMMON_CLASSES = {

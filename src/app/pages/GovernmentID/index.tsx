@@ -1,10 +1,13 @@
-import { useMemo, useCallback } from 'react';
+//libs
+import { useMemo, useCallback, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import { idStyle } from './styles';
 import c from 'classnames';
+//components
 import { InfoCard, ContentWrapper, Box, TypeList, Button, Typography } from 'app/components';
+//consts
 import { GOVT_IDS } from './consts';
-import { useState } from 'react';
+//styles
+import { idStyle } from './styles';
 
 const govtIds = GOVT_IDS.map((id) => id.type);
 

@@ -1,12 +1,12 @@
 //libs
 import c from 'classnames';
 import Avatar from '@material-ui/core/Avatar';
+import { useHistory } from 'react-router';
+import { useCallback } from 'react';
 //components
 import { ContentWrapper, InfoCard, Box, Button, Typography } from 'app/components';
 //styles
 import { selfieStyles } from './styles';
-import { useCallback } from 'react';
-import { useHistory } from 'react-router';
 
 const SelfiePage = () => {
   const history = useHistory();

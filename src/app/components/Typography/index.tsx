@@ -1,5 +1,7 @@
-import { forwardRef } from 'react';
+//libs
 import c from 'classnames';
+import { forwardRef } from 'react';
+//types
 import { TypographyProps, TypographyVariants } from './types';
 
 const getDefaultComponent = (variant: TypographyVariants) => {

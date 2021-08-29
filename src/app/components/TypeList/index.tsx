@@ -1,7 +1,9 @@
 //libs
-import { useCallback, useState } from 'react';
-import { Box, Button, Typography } from 'app/components';
 import c from 'classnames';
+import { useCallback, useState } from 'react';
+//components
+import { Box, Button, Typography } from 'app/components';
+//styles
 import { buttonStyle } from './styles';
 
 interface TypeListProps {

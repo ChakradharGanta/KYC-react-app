@@ -44,7 +44,9 @@ const VerifyPhoto = (props: any) => {
       />
       <ContentWrapper>
         <Typography variant="display-s">
-          {type === 'selfie' ? 'Your selfie' : `${side} side of ${type}`}
+          {type === 'selfie'
+            ? 'Your selfie'
+            : `${side === 'front' ? 'Front' : 'Back'} side of ${type}`}
         </Typography>
         <Typography variant="body-short-02">
           {type === 'selfie'

@@ -11,9 +11,12 @@ import { idStyle } from '../GovernmentID/styles';
 const VerifyPhoto = (props: any) => {
   const { history } = props;
   const { type, side } = props.match.params;
-  const { imgSrc } = history.location.state;
 
   let path: string;
+
+  const item =
+    window.sessionStorage.getItem(type === 'selfie' ? `${type}` : `${type}-${side}`) || '';
+  const imgSrc = JSON.parse(item);
 
   if (type === 'selfie') {
     path = '/governmentId/front';
@@ -29,7 +32,7 @@ const VerifyPhoto = (props: any) => {
 
   const onSubmit = useCallback(() => {
     sessionStorage.setItem(
-      type === 'selfie' ? `${type}` : `${type} ${side}`,
+      type === 'selfie' ? `${type}` : `${type}-${side}`,
       JSON.stringify(imgSrc)
     );
     history.replace({ pathname: path }, { triggered: true });
@@ -40,7 +43,7 @@ const VerifyPhoto = (props: any) => {
       <InfoCard
         mainInfo="Verify your photo"
         subInfo="Make sure your face and detals are clearly visible"
-        imgSrc="id.png"
+        imgSrc="/id.png"
       />
       <ContentWrapper>
         <Typography variant="display-s">

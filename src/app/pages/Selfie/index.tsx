@@ -26,7 +26,7 @@ const SelfiePage = () => {
         <Typography variant="body-short-02" className="my-8">
           Make sure your whole face is visible without any glare or blur
         </Typography>
-        <Avatar src={'selfie.png'} className={c('mx-auto mt-24', selfieStyles)} />
+        <Avatar src="/selfie.png" className={c('mx-auto mt-24', selfieStyles)} />
         <Box className="mt-24 mx-auto">
           <Button variant="contained" color="primary" onClick={_onClick}>
             <Typography>Click Photo</Typography>

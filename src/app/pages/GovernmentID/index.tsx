@@ -25,14 +25,14 @@ const GovernmentID = (props: any) => {
   return (
     <>
       <InfoCard
-        imgSrc="id.png"
+        imgSrc="/id.png"
         mainInfo="Verify your identity"
         subInfo="Please upload a Government ID for KYC verification"
       />
       <ContentWrapper>
         <Typography variant="display-s">Select a Government ID</Typography>
         {side === 'front' ? (
-          <TypeList name="govtId" list={govtIds} onTypeChange={setGovtId} />
+          <TypeList defaultValue={govtId} name="govtId" list={govtIds} onTypeChange={setGovtId} />
         ) : null}
         <Typography className="mt-6">
           {side === 'front' ? 'Front' : 'Back'} side of {govtId}

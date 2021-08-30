@@ -71,7 +71,12 @@ const Camera = (props: any) => {
       path = `/verifyPhoto/${type}/${side}`;
     }
 
-    history.replace(path, { imgSrc: imageUrl });
+    window.sessionStorage.setItem(
+      type === 'selfie' ? `${type}` : `${type}-${side}`,
+      JSON.stringify(imageUrl)
+    );
+
+    history.replace(path, { triggered: true });
   };
 
   const goBack = async () => {

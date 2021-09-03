@@ -17,7 +17,6 @@ interface TypeListProps {
 const TypeList = (props: TypeListProps) => {
   const { list, className = '', name, onTypeChange, defaultValue = '' } = props;
   const [gender, setGender] = useState(defaultValue);
-  console.log(gender, list);
   const _onClick = useCallback(
     (item: string) => {
       sessionStorage.setItem(name, item);

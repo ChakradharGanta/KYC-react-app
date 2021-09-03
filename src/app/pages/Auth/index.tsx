@@ -2,17 +2,17 @@
 import React, { useState } from 'react';
 import c from 'classnames';
 import Avatar from '@material-ui/core/Avatar';
+import { Link } from 'react-router-dom';
 //components
 import { Box, Input, Button, Typography } from 'app/components';
+import { signInUser } from 'app/Firebase';
 //styles
 import { logoStyle } from './styles';
 import { useHistory } from 'react-router';
 
-const auth = 'chakri';
-
 const Auth = () => {
   const [username, setUsername] = useState('');
-  const [password, setpassword] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const history = useHistory();
   window.sessionStorage.setItem('currentPath', history.location.pathname);
@@ -22,14 +22,18 @@ const Auth = () => {
   };
 
   const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setpassword(event.target.value);
+    setPassword(event.target.value);
   };
 
   const onButtonClick = () => {
-    if (!(username === auth && password === auth)) {
-      setError(true);
-    }
-    history.replace({ pathname: '/customerDetails' }, { triggered: true });
+    setError(false);
+    signInUser(username, password)
+      .then(() => {
+        history.replace({ pathname: '/customerDetails' }, { triggered: true });
+      })
+      .catch((error) => {
+        setError(true);
+      });
   };
 
   return (
@@ -47,6 +51,7 @@ const Auth = () => {
           placeholder="Username"
           className="w-full"
           error={error}
+          type={'email'}
           onChange={onUsernameChange}
         />
         <Input
@@ -56,7 +61,14 @@ const Auth = () => {
           type="password"
           onChange={onPasswordChange}
         />
-        {error ? <Box className="text-2xl text-red">Invalid credentials</Box> : null}
+        {error ? <Typography variant={'body-short-02'}>Invalid credentials</Typography> : null}
+        <Link
+          to={{
+            pathname: '/signup',
+            state: { triggered: true },
+          }}>
+          <Typography variant={'body-short-02'}>Don't have an account? Sign up</Typography>
+        </Link>
         <Button
           variant="contained"
           color="primary"

@@ -7,6 +7,7 @@ import Selfie from 'app/pages/Selfie';
 import Success from 'app/pages/Success';
 import VerifyPhoto from 'app/pages/VerifyPhoto';
 import ProtectedRoute from './ProtectedRoute';
+import SignupPage from './app/pages/Signup';
 
 const Routes = () => {
   return (
@@ -19,6 +20,7 @@ const Routes = () => {
         <ProtectedRoute exact path="/selfie" component={Selfie} />
         <ProtectedRoute exact path="/verifyPhoto/:type/:side" component={VerifyPhoto} />
         <ProtectedRoute exact path="/success" component={Success} />
+        <Route exact path="/signup" component={SignupPage} />
       </Switch>
     </Router>
   );
